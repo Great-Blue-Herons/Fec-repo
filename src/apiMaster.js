@@ -1,38 +1,39 @@
 import axios from "axios";
-const url = "http://18.224.200.47";
-
+const reviews_url = "http://44.202.141.124:3000";
+const products_url = "http://3.86.144.49:3000";
+const questions_url = "http://18.117.179.155";
 const getProductList = () => {
-  return axios.get(`${url}/products`);
+  return axios.get(`${products_url}/products`);
 };
 
 const getProductInfo = (id = 1) => {
-  return axios.get(`${url}/products/${id}`);
+  return axios.get(`${products_url}/products/${id}`);
 };
 
 const getProductStyles = (id = 1) => {
-  return axios.get(`${url}/products/${id}/styles`);
+  return axios.get(`${products_url}/products/${id}/styles`);
 };
 
 const getRelatedProducts = (id = 1) => {
-  return axios.get(`${url}/products/${id}/related`);
+  return axios.get(`${products_url}/products/${id}/related`);
 };
 
 const getQA = (id = 1) => {
-  return axios.get(`${url}/qa/${id}`);
+  return axios.get(`${products_url}/qa/${id}`);
 };
 
 const getReviewMetaData = (id = 1) => {
-  return axios.get(`${url}/reviews/${id}/meta`);
+  return axios.get(`${reviews_url}/reviews/${id}/meta`);
 };
 
 const getReviewsOfProduct = (id = 1, sortString = "relevant", count = 20) => {
   return axios.get(
-    `${url}/reviews/${id}/list?sort=${sortString}:asc&count=${count}}`
+    `${reviews_url}/reviews/${id}/list?sort=${sortString}:asc&count=${count}}`
   );
 };
 
 const reportReview = (reviewId) => {
-  return axios.put(`${url}/reviews/report/${reviewId}`);
+  return axios.put(`${reviews_url}/reviews/report/${reviewId}`);
 };
 
 const postReview = (
@@ -46,7 +47,7 @@ const postReview = (
   photos,
   characteristics
 ) => {
-  return axios.post(`${url}/reviews/${id}`, {
+  return axios.post(`${reviews_url}/reviews/${id}`, {
     rating: rating,
     summary: summary,
     body: body,
@@ -76,7 +77,7 @@ const getSpecificAnswers = (questionId) => {
 };
 
 const askQuestion = (id, text, name, email) => {
-  return axios.post(`${url}/qa/${id}`, {
+  return axios.post(`${questions_urll}/qa/${id}`, {
     body: text,
     name: name,
     email: email,
@@ -84,7 +85,7 @@ const askQuestion = (id, text, name, email) => {
 };
 
 const answerQuestion = (questionId, text, name, email, photos = []) => {
-  return axios.post(`${url}/qa/${questionId}/answers`, {
+  return axios.post(`${questions_url}/qa/${questionId}/answers`, {
     body: text,
     name: name,
     email: email,
@@ -93,19 +94,19 @@ const answerQuestion = (questionId, text, name, email, photos = []) => {
 };
 
 const markQAsHelpful = (questionId) => {
-  return axios.put(`${url}/qa/question/${questionId}/helpful`);
+  return axios.put(`${questions_url}/qa/question/${questionId}/helpful`);
 };
 
 const reportQuestion = (questionId) => {
-  return axios.put(`${url}/qa/question/${questionId}/report`);
+  return axios.put(`${questions_url}/qa/question/${questionId}/report`);
 };
 
 const markAnsAsHelpful = (answerID) => {
-  return axios.put(`${url}/qa/answer/${answerID}/helpful`);
+  return axios.put(`${questions_url}/qa/answer/${answerID}/helpful`);
 };
 
 const reportAns = (answerID) => {
-  return axios.put(`${url}/qa/answer/${answerID}/report`);
+  return axios.put(`${questions_url}/qa/answer/${answerID}/report`);
 };
 
 const apiMaster = {
